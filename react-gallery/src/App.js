@@ -4,37 +4,120 @@ import Nav from '../src/Components/Nav';
 import NotFound from '../src/Components/NotFound';
 import Form from '../src/Components/Form';
 import Results from '../src/Components/Results';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import apiKey from '../src/Components/config.js';
 
 class App extends Component{
   constructor() {
     super();
     this.state = {
-      photos: []
+      catPhotos: [],
+      dogPhotos: [],
+      zebraPhotos: [],
+      giraffePhotos: [],
+      searchData:[],
+      searchQuery:"",
+      isLoading: true
     };
   } 
 
   componentDidMount() {
-    axios.get('ttps://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=248f59d18a18f99816c0a677f8ba3d46&tags=animals&format=json&nojsoncallback=1&api_sig=ec52a61fab4808d14db01b343b4020a5')
+   
+    //Fetch cat pictures
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&page=1&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({
-          photos: response.data.data
+          catPhotos: response.data.photos.photo,
+          isLoading: false
+        });
+      })
+      .catch(error => {
+        console.log('Error fetching and parsing data', error);
+      });
+
+      // Fetch dog pictures
+      axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=dogs&per_page=24&page=1&format=json&nojsoncallback=1`)
+        .then(response => {
+          this.setState({
+            dogPhotos: response.data.photos.photo
+          });
+        })
+        .catch(error => {
+          console.log('Error fetching and parsing data', error);
+        });
+
+        // Fetch tiger pictures
+      axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=zebras&per_page=24&page=1&format=json&nojsoncallback=1`)
+      .then(response => {
+        this.setState({
+          zebraPhotos: response.data.photos.photo
+        });
+      })
+      .catch(error => {
+        console.log('Error fetching and parsing data', error);
+      });
+
+      // Fetch giraffe pictures
+      axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=giraffe&per_page=24&page=1&format=json&nojsoncallback=1`)
+      .then(response => {
+        this.setState({
+          giraffePhotos: response.data.photos.photo
         });
       })
       .catch(error => {
         console.log('Error fetching and parsing data', error);
       });
   }
+    
+   performSearch=(query)=>{
+
+    this.setState({ isLoading: true});
+
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&page=1&format=json&nojsoncallback=1`)
+      .then(response => {
+        this.setState({
+          searchData: response.data.photos.photo,
+          searchQuery: query,
+          isLoading: false
+        });
+      })
+      .catch(error => {
+        console.log('Error fetching and parsing data', error);
+      });
+
+   }
+
 
   render(){
     console.log(this.state.photos);
   return (
-    <div>
-    <Form />
-    <Nav />
-    <Results data={this.state.photos} />
-    <NotFound />
+    <BrowserRouter>
+    <div className="container">
+      <Form onSearch={ this.performSearch } searchData={this.state.searchQuery} />
+      <Nav />
+      {
+        /**
+        *   Show Loading text if isLoading === true,  
+        *   otherwise show proper <PhotoContainer /> component
+        **/ 
+        (this.state.isLoading) 
+          ? <p>Loading...</p>
+          :  <Switch>
+              <Route exact path="/" render={ () => <Redirect to="/cats" /> } />
+              <Route path="/cats" render={ () => <Results data={this.state.catPhotos} /> } />
+              <Route path="/dogs" render={ () => <Results data={this.state.dogPhotos} /> } />
+              <Route path="/zebras" render={ () => <Results data={this.state.zebraPhotos} /> } />
+              <Route path="/giraffe" render={ () => <Results data={this.state.giraffePhotos} /> } />
+              <Route path="/search/:query" render={ () => <Results 
+                                                            data={this.state.searchData} 
+                                                            searchQuery={this.state.searchQuery} 
+                                                            newSearch={this.performSearch}
+                                                          /> } />
+              <Route component={ NotFound }/>
+            </Switch>
+      }
     </div>
+  </BrowserRouter>
   );
   }
 }

@@ -4,15 +4,18 @@ import Photos from '../Components/Photos';
 
 const Results=(props)=> {
  const results=props.data;
- let photos=results.map(photos=>
-    <Photos />
+ let photos=results.map(photo=>
+    <Photos url={`https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_w.jpg`}
+       key={photo.id} 
+       alt={photo.title}
+     />
     );
   return (
     <div className="photo-container">
         <h2>Results</h2>
         <div className="container">
         <ul>
-        <Photos />
+         {photos}
         </ul>
       </div>
     </div>
