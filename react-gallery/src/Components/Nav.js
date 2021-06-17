@@ -6,10 +6,10 @@ const Nav=()=> {
     <div>
       <nav class="main-nav">
         <ul>
-          <li><a href='/search/cats'>Cats</a></li>
-          <li><a href='/search/dogs'>Dogs</a></li>
-          <li><a href='/search/zebras'>Zebras</a></li>
-          <li><a href='/search/giraffe'>Giraffe</a></li>
+          <li><a href='/cats'>Cats</a></li>
+          <li><a href='/dogs'>Dogs</a></li>
+          <li><a href='/zebras'>Zebras</a></li>
+          <li><a href='/giraffe'>Giraffe</a></li>
         </ul>
       </nav>
     </div>
