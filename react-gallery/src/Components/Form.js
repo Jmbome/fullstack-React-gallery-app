@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import '../css/index.css';
 
  class Form extends Component {
@@ -14,7 +15,12 @@ import '../css/index.css';
   
   handleSubmit = e => {
     e.preventDefault();
+     
+    let query = this.query.value;
+    let path = `/search/${query}`;
+
     this.props.onSearch(this.query.value);
+    this.props.history.push(path);
     e.currentTarget.reset();
   }
 
@@ -35,4 +41,4 @@ import '../css/index.css';
   }
  
 }
-  export default Form;
+export default withRouter(Form);
