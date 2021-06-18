@@ -4,7 +4,7 @@ import Nav from '../src/Components/Nav';
 import NotFound from '../src/Components/NotFound';
 import Form from '../src/Components/Form';
 import Results from '../src/Components/Results';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { HashRouter, Route, Redirect, Switch } from 'react-router-dom';
 import apiKey from '../src/Components/config.js';
 
 class App extends Component{
@@ -96,7 +96,7 @@ class App extends Component{
   render(){
     console.log(this.state.photos);
   return (
-    <BrowserRouter>
+    <HashRouter>
     <div className="container">
       <Form onSearch={ this.performSearch } searchData={this.state.searchQuery} />
       <Nav />
@@ -122,7 +122,7 @@ class App extends Component{
             </Switch>
       }
     </div>
-  </BrowserRouter>
+  </HashRouter>
   );
   }
 }
