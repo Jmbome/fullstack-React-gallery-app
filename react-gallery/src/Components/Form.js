@@ -3,23 +3,29 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import '../css/index.css';
 
+
+
  class Form extends Component {
   
   state = {
     query: ''
   }
-  
+  //sets component's state to search field value
   onSearchChange = e => {
     this.setState({ query: e.target.value });
   }
   
+  //submit handler; renders output on clicking submit button
   handleSubmit = e => {
     e.preventDefault();
-     
+     //defines URL by referencinf form's input
     let query = this.query.value;
     let path = `/search/${query}`;
 
+    //runs search using query data
     this.props.onSearch(this.query.value);
+
+    //Adds new path to History 
     this.props.history.push(path);
     e.currentTarget.reset();
   }
@@ -36,6 +42,7 @@ import '../css/index.css';
           </svg>
         </button>
       </form>
+
       </div>
     );
   }

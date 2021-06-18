@@ -11,12 +11,17 @@ class App extends Component{
   constructor() {
     super();
     this.state = {
+      //Empty arrays to be fiiled by data from get request
       catPhotos: [],
       dogPhotos: [],
       zebraPhotos: [],
       giraffePhotos: [],
+
+      //updates when a query search is made
       searchData:[],
       searchQuery:"",
+
+      //show/hide loading text between get requests
       isLoading: true
     };
   } 

@@ -1,6 +1,8 @@
 import React from 'react';
 import '../css/index.css';
 import Photos from '../Components/Photos';
+import NotFound from './NotFound';
+import { withRouter } from 'react-router-dom';
 
 const Results=(props)=> {
  const results=props.data;
@@ -13,13 +15,13 @@ const Results=(props)=> {
   return (
     <div className="photo-container">
         <h2>Results</h2>
-        <div className="container">
         <ul>
-         {photos}
+        {/*Conditional statement that displays fetched data if any and an error message if the search is empty*/}
+        { (props.data.length > 0) ? photos: <NotFound /> }
         </ul>
-      </div>
+     
     </div>
   );
 }
 
-export default Results;
+export default withRouter(Results);
