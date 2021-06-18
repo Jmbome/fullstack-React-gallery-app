@@ -2,6 +2,7 @@ body {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
   color: #3f4850;
+  background-color: #eed7b9;
 }
 
 h2 {
@@ -54,8 +55,10 @@ input {
   display: block;
   background: #438bbd;
   border-radius: 3px;
-  padding: 5px;
+  padding: 10px;
+  margin: 7px;
   color: #fff;
+  width:8rem
 }
 
 .main-nav .active,
