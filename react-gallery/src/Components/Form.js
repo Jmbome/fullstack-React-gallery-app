@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter,BrowserRouter} from 'react-router-dom';
 import '../css/index.css';
 
 
@@ -15,9 +15,11 @@ import '../css/index.css';
     this.setState({ query: e.target.value });
   }
   
+  
   //submit handler; renders output on clicking submit button
   handleSubmit = e => {
     e.preventDefault();
+    
      //defines URL by referencinf form's input
     let query = this.query.value;
     let path = `/search/${query}`;
@@ -32,6 +34,7 @@ import '../css/index.css';
 
     render(){
     return (
+      <BrowserRouter>
       <div>
        <form className="search-form" onSubmit={this.handleSubmit}>
         <input type="search" name="search" placeholder="Search" onChange={this.onSearchChange} ref={ (input) => this.query = input } required/>
@@ -42,8 +45,8 @@ import '../css/index.css';
           </svg>
         </button>
       </form>
-
       </div>
+      </BrowserRouter>
     );
   }
  

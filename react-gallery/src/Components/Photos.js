@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 const Photos = props => (
     <li>
@@ -8,4 +9,4 @@ const Photos = props => (
             
 );
 
-export default Photos;
+export default withRouter(Photos);
