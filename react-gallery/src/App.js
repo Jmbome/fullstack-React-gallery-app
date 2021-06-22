@@ -4,7 +4,7 @@ import Nav from '../src/Components/Nav';
 import NotFound from '../src/Components/NotFound';
 import Form from '../src/Components/Form';
 import Results from '../src/Components/Results';
-import { HashRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { HashRouter, Route, Redirect, Switch, withRouter } from 'react-router-dom';
 import apiKey from '../src/Components/config.js';
 
 
@@ -97,6 +97,12 @@ class App extends Component{
 
    }
     
+   componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      this.performSearch();
+    }
+  }
 
   render(){
     console.log(this.state.photos);
@@ -132,4 +138,4 @@ class App extends Component{
   }
 }
 
-export default App;
+export default withRouter(App);

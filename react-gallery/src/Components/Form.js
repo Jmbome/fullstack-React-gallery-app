@@ -35,6 +35,7 @@ import '../css/index.css';
       strict: false
     });
     this.props.history.push(match);
+    this.props.history.goBack();
     e.currentTarget.reset();
   }
 
