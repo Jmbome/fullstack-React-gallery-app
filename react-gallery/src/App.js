@@ -7,8 +7,11 @@ import Results from '../src/Components/Results';
 import { HashRouter, Route, Redirect, Switch } from 'react-router-dom';
 import apiKey from '../src/Components/config.js';
 
+
 class App extends Component{
   constructor() {
+   
+
     super();
     this.state = {
       //Empty arrays to be fiiled by data from get request
@@ -25,6 +28,8 @@ class App extends Component{
       isLoading: true
     };
   } 
+
+ 
 
   componentDidMount() {
    
@@ -91,7 +96,7 @@ class App extends Component{
       });
 
    }
-
+    
 
   render(){
     console.log(this.state.photos);

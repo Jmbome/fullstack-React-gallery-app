@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import { withRouter,BrowserRouter} from 'react-router-dom';
+import { matchPath } from "react-router";
 import '../css/index.css';
 
 
@@ -22,13 +23,18 @@ import '../css/index.css';
     
      //defines URL by referencinf form's input
     let query = this.query.value;
-    let path = `/search/${query}`;
+    
 
     //runs search using query data
     this.props.onSearch(this.query.value);
 
     //Adds new path to History 
-    this.props.history.push(path);
+    const match = matchPath(`/${query}`, {
+      path: `/search/${query}`,
+      exact: true,
+      strict: false
+    });
+    this.props.history.push(match);
     e.currentTarget.reset();
   }
 
