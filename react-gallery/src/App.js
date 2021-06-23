@@ -100,7 +100,7 @@ class App extends Component{
    componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
     if (this.props.match.params.id !== prevProps.match.params.id) {
-      this.performSearch();
+      this.performSearch(prevProps);
     }
   }
 
