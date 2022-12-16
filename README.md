@@ -1,2 +1,2 @@
-# fullstack-project-7
+# fullstack-React gallery app
  React gallery app
